@@ -1,0 +1,15 @@
+---
+- hosts: all
+  tasks:
+    - name: install mysql repo
+      get_url: url=https://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb dest=/etc/yum.repos.d/mysql.repo
+    - name: install mysql-server
+      yum: name=mysql-server state=present
+    - name: Build hosts file
+      lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_default_ipv4.address }} {{item}}" state=present
+      when: hostvars[item].ansible_default_ipv4.address is defined
+      with_items: groups['all']
+    - name: install ntp
+      yum: name=ntp state=present
+    - name: enable and run ntpd
+      service: name=ntpd state=started enabled=yes

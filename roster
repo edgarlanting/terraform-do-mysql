@@ -1,0 +1,18 @@
+mysql-01:
+  host: 46.101.238.8
+  user: root
+  mine_functions:
+    network.ip_addrs:
+      interface: eth0
+mysql-02:
+  host: 46.101.96.92
+  user: root
+  mine_functions:
+    network.ip_addrs:
+      interface: eth0
+mysql-03:
+  host: 46.101.104.1
+  user: root
+  mine_functions:
+    network.ip_addrs:
+      interface: eth0
